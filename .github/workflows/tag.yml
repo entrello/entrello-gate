@@ -29,18 +29,28 @@ jobs:
           tag_name: ${{ steps.tag_version.outputs.new_tag }}
           release_name: Release ${{ steps.tag_version.outputs.new_tag }}
           body: ${{ steps.tag_version.outputs.changelog }}
-      - name: Upload Release Asset
-        id: upload-release-asset
+      - name: Upload INTEL Release Asset
+        id: upload-release-asset-intel
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./EntrelloGate.dmg
-          asset_name: EntrelloGate.dmg
+          asset_path: ./EntrelloGate-INTEL.dmg
+          asset_name: EntrelloGate-INTEL.dmg
           asset_content_type: application/octet-stream
-      - name: Upload Release Asset
-        id: upload-release-asset2
+      - name: Upload ARM Release Asset
+        id: upload-release-asset-arm
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./EntrelloGate-ARM.dmg
+          asset_name: EntrelloGate-ARM.dmg
+          asset_content_type: application/octet-stream
+      - name: Upload EXE Release Asset
+        id: upload-release-asset-exe
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
